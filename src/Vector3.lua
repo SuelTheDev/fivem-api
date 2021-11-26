@@ -1,27 +1,3 @@
-function DegreeToRadian(angle)
-	return angle * 0.0174532925199433
-end
-
-function RadianToDegree(angle)
-	return angle / 0.0174532925199433
-end
-
-function get_random_float_in_range(min, max)
-    local min = math.ceil(min)
-    local max = math.floor(max)
-    return math.random() * (max - min + 1) + min
-end
-
-function get_random_int_in_range(min, max)
-    return math.floor( get_random_float_in_range(min, max))
-end
-
-function GetHeadingFromCoords(source, target)
-    assert((type(source) == "table" and source.type and source.type == "class<vector3>") or type(source) == "vector3", "Invalid Vector3 class")
-    assert((type(target) == "table" and target.type and target.type == "class<vector3>") or type(target) == "vector3", "Invalid Vector3 class")
-    return math.atan2((target.y - source.y), (target.x - source.x))
-end
-
 Vector3 = class()
 Vector3:set("type", "class<vector3>")
 Vector3:set("x", 0)
@@ -205,7 +181,7 @@ Vector3.Add = function(left, right)
     return Vector3(left.x + right.x, left.y + right.y, left.z + right.z)
 end
 
-Vector3.Sub = function(a, b)
+Vector3.Sub = function(left, right)
     assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
     assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
     return Vector3(left.x - right.x, left.y - right.y, left.z - right.z)
@@ -217,7 +193,7 @@ Vector3.Mul = function(left, scalar)
 end
 
 
-Vector3.Mod = function(a, b)
+Vector3.Mod = function(left, right)
     assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
     assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
     return Vector3(left.x * right.x, left.y * right.y, left.z * right.z)
@@ -228,7 +204,7 @@ Vector3.Div = function(left, scalar)
     return Vector3(left.x / scalar, left.y / scalar, left.z / scalar)
 end
 
-Vector3.DivVec = function(a, b)
+Vector3.DivVec = function(left, right)
     assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
     assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
     return Vector3(left.x / right.x, left.y / right.y, left.z / right.z)
@@ -290,18 +266,18 @@ Vector3.Reflect = function (vector, normal)
     return Vector3(x, y, z);
 end
 
-Vector3.Minimize = function(a, b)
-    assert((type(a) == "table" and a.type and a.type == "class<vector3>") or type(a) == "vector3", "Invalid Vector3 class")
-    assert((type(b) == "table" and b.type and b.type == "class<vector3>") or type(b) == "vector3", "Invalid Vector3 class")
+Vector3.Minimize = function(left, right)
+    assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
+    assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
     local x = (a.x < b.x) and a.x or b.x
     local y = (a.y < b.y) and a.y or b.y
     local z = (a.z < b.z) and a.z or b.z
     return Vector3(x, y, z)
 end
 
-Vector3.Maximize = function(a, b)
-    assert((type(a) == "table" and a.type and a.type == "class<vector3>") or type(a) == "vector3", "Invalid Vector3 class")
-    assert((type(b) == "table" and b.type and b.type == "class<vector3>") or type(b) == "vector3", "Invalid Vector3 class")
+Vector3.Maximize = function(left, right)
+    assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
+    assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
     local x = (a.x > b.x) and a.x or b.x
     local y = (a.y > b.y) and a.y or b.y
     local z = (a.z > b.z) and a.z or b.z
@@ -313,15 +289,15 @@ function Vector3:Equals(a)
     return (self.x == a.x) and (self.y == a.y) and (self.z == a.z)
 end
 
-Vector3.Equals = function(a, b)
-    assert((type(a) == "table" and a.type and a.type == "class<vector3>") or type(a) == "vector3", "Invalid Vector3 class")
-    assert((type(b) == "table" and b.type and b.type == "class<vector3>") or type(b) == "vector3", "Invalid Vector3 class")
+Vector3.Equals = function(left, right)
+    assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
+    assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
     return (b.x == a.x) and (b.y == a.y) and (b.z == a.z)
 end
 
-Vector3.DistanceBetween = function(a, b)
-    assert((type(a) == "table" and a.type and a.type == "class<vector3>") or type(a) == "vector3", "Invalid Vector3 class")
-    assert((type(b) == "table" and b.type and b.type == "class<vector3>") or type(b) == "vector3", "Invalid Vector3 class")
+Vector3.DistanceBetween = function(left, right)
+    assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
+    assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
     return Vector3.Sub(a, b):Length()
 end
 

@@ -2,7 +2,8 @@ fx_version "cerulean"
 game "gta5"
 
 shared_scripts {
-    "shared/class.lua"
+    "shared/class.lua",
+    "shared/Utils.lua"
 }
 
 client_scripts {
