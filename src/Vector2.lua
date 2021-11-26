@@ -238,7 +238,7 @@ Vector2.DistanceBetween = function(a, b)
 end
 
 function Vector2:toString()
-    return tostring(Vector2(self.x, self.y))
+    return tostring(vector2(self.x, self.y))
 end
 
 function Vector2:clear()
