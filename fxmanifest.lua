@@ -7,7 +7,11 @@ shared_scripts {
 }
 
 client_scripts {
-    "src/*.lua",
+    "src/Vector2.lua",
+    "src/Vector3.lua",
+    "src/GTAentity.lua",
+    "src/RaycastResult.lua",
+    "src/Camera.lua",   
     "test/*.lua"
 }
 

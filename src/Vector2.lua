@@ -3,8 +3,6 @@ Vector2:set("type", "class<vector2>")
 Vector2:set("x", 0)
 Vector2:set("y", 0)
 
-
-
 function Vector2:init(...)
     local t = ...
     if t then
@@ -13,9 +11,12 @@ function Vector2:init(...)
             self.y = t.y
         else
             local t = {...}
-            self.x = t[1]
-            self.y = t[2]
+            self.x = tonumber(t[1])
+            self.y = tonumber(t[2])
         end
+    else
+        self.x = 0
+        self.y = 0 
     end
 end
 
@@ -244,4 +245,8 @@ end
 function Vector2:clear()
     self.x = 0
     self.y = 0
+end
+
+function Vector2:toNative()
+    return vector2(self.x, self.y)
 end

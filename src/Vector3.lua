@@ -13,10 +13,14 @@ function Vector3:init(...)
             self.z = t.z
         else
             local t = {...}
-            self.x = t[1]
-            self.y = t[2]
-            self.z = t[3]
+            self.x = tonumber(t[1])
+            self.y = tonumber(t[2])
+            self.z = tonumber(t[3])
         end
+    else
+        self.x = 0
+        self.y = 0
+        self.z = 0 
     end
 end
 
@@ -162,7 +166,7 @@ Vector3.RandomXY = function()
 	v.x = get_random_float_in_range(0.0, 1.0) - 0.5;
 	v.y = get_random_float_in_range(0.0, 1.0) - 0.5;
 	v.z = 0.0;
-	v.Normalize();
+	v:Normalize();
 	return v;
 end
 
@@ -171,7 +175,7 @@ Vector3.RandomXYZ = function()
 	v.x = get_random_float_in_range(0.0, 1.0) - 0.5;
 	v.y = get_random_float_in_range(0.0, 1.0) - 0.5;
 	v.z = get_random_float_in_range(0.0, 1.0) - 0.5;
-	v.Normalize();
+	v:Normalize();
 	return v;
 end
 
@@ -244,7 +248,7 @@ end
 Vector3.Dot = function(left, right)
     assert((type(left) == "table" and left.type and left.type == "class<vector3>") or type(left) == "vector3", "Invalid Vector3 class")
     assert((type(right) == "table" and right.type and right.type == "class<vector3>") or type(right) == "vector3", "Invalid Vector3 class")
-    return (left.x * right.x + left.y * right.y + left.z * right.z)
+    return left.x * right.x + left.y * right.y + left.z * right.z
 end
 
 Vector3.Cross = function(left, right)
@@ -301,7 +305,8 @@ Vector3.DistanceBetween = function(left, right)
     return Vector3.Sub(a, b):Length()
 end
 
-function Vector3:RotationToDirection( rotation )
+Vector3.RotationToDirection = function ( rotation )
+    print(rotation)
     assert((type(rotation) == "table" and rotation.type and rotation.type == "class<vector3>") or type(rotation) == "vector3", "Invalid Vector3 class")
     local retz = rotation.z * 0.0174532924
 	local retx = rotation.x * 0.0174532924;
@@ -309,8 +314,8 @@ function Vector3:RotationToDirection( rotation )
 	return Vector3(-math.sin(retz) * absx, math.cos(retz) * absx, math.sin(retx));
 end
 
-function Vector3:DirectionToRotation (direction)
-    assert((type(normal) == "table" and normal.type and normal.type == "class<vector3>"), "Invalid Vector3 class")
+Vector3.DirectionToRotation = function (direction)
+    assert((type(direction) == "table" and direction.type and direction.type == "class<vector3>") or type(direction) == "vector3", "Invalid Vector3 class")
     direction.Normalize()
     local xx = math.atan2(direction.z, direction.y) / 0.0174532924
     local yy = 0
@@ -326,6 +331,10 @@ function Vector3:clear()
     self.x = 0
     self.y = 0
     self.z = 0
+end
+
+function Vector3:toNative()
+    return vector3( self.x, self.y, self.z )
 end
 
 
