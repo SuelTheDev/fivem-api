@@ -10,7 +10,7 @@ client_scripts {
     "src/Vector2.lua",
     "src/Vector3.lua",
     "src/GTAentity.lua",
-    "src/RaycastResult.lua",
+    "src/RaycastResult.lua",    
     "src/Camera.lua",   
     "test/*.lua"
 }
@@ -18,5 +18,3 @@ client_scripts {
 files {
     "shared/*.lua"
 }
-
-lua54 "yes"

@@ -121,9 +121,6 @@ function RaycastResult:init(...)
         self.mSurfaceNormal = p:SurfaceNormal()
     elseif type(p) == "number" then
         local retval, hit, endCoords, surfaceNormal, entityHit = GetShapeTestResult(p)
-
-        print(retval, hit, endCoords, surfaceNormal, entityHit)
-
         self.mResult = retval
         self.mDidHit = Vector3(hit)
         self.mHitCoords = Vector3(endCoords)
@@ -136,8 +133,6 @@ function RaycastResult:init(...)
         else
             self.mHitEntity = GTAentity(0)
         end
-
-        print(self.mResult, self.mDidHit, self.mHitCoords, self.mSurfaceNormal, self.mHitEntity)
     end
 end
 
